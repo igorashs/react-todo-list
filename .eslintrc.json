@@ -47,6 +47,7 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "no-undef": "off"
   }
 }
