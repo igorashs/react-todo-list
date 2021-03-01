@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import CssBaseLine from '@material-ui/core/CssBaseline';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import TodoProvider from './TodoContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseLine />
-    <App />
+    <TodoProvider>
+      <App />
+    </TodoProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
