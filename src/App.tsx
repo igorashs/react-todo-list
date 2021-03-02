@@ -1,69 +1,60 @@
 import {
   Button,
-  TextField,
   List,
   ListItem,
   Typography,
   Grid,
-  Box,
+  Container,
 } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
 import { useTodoStore } from './TodoContext';
+import Header from './Header';
+import NewTodoForm from './NewTodoForm';
 
 const App = observer(() => {
-  const todoStore = useTodoStore();
-  const [newTodo, setNewTodo] = useState('');
+  const { todos, toggleCompleted, removeTodo } = useTodoStore();
 
   return (
-    <Box m={4}>
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: '100vh' }}
-      >
-        <Grid item>
-          <List>
-            {todoStore.todos.map((todo) => (
-              <ListItem key={todo.id} disableGutters>
-                <Grid container justify="space-between">
-                  <Typography>{todo.text}</Typography>
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => todoStore.removeTodo(todo.id)}
-                  >
-                    remove
-                  </Button>
-                </Grid>
-              </ListItem>
-            ))}
-          </List>
+    <>
+      <Header />
 
-          <Grid container direction="column">
-            <TextField
-              type="text"
-              value={newTodo}
-              onChange={(e) => setNewTodo(e.target.value)}
-            />
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                if (newTodo) {
-                  todoStore.addTodo(newTodo);
-                  setNewTodo('');
-                }
-              }}
-            >
-              Add
-            </Button>
+      <Container maxWidth="sm">
+        <Grid container direction="column">
+          <Grid item>
+            <List>
+              {todos.map((todo) => (
+                <ListItem
+                  key={todo.id}
+                  disableGutters
+                  button
+                  onClick={() => toggleCompleted(todo.id)}
+                >
+                  <Grid container justify="space-between">
+                    <Typography
+                      style={{
+                        textDecoration: todo.isCompleted
+                          ? 'line-through'
+                          : 'none',
+                      }}
+                    >
+                      {todo.text}
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => removeTodo(todo.id)}
+                    >
+                      remove
+                    </Button>
+                  </Grid>
+                </ListItem>
+              ))}
+            </List>
+            <NewTodoForm />
           </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Container>
+    </>
   );
 });
 
