@@ -8,9 +8,8 @@ import {
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    justifyContent: 'space-between',
+  title: {
+    flexGrow: 1,
   },
 
   fabLink: {
@@ -22,9 +21,11 @@ const Header = () => {
   const classes = useStyles();
 
   return (
-    <AppBar>
-      <Toolbar className={classes.container}>
-        <Typography variant="h4">TodoList</Typography>
+    <AppBar position="sticky">
+      <Toolbar>
+        <Typography variant="h4" className={classes.title}>
+          TodoList
+        </Typography>
         <Fab
           className={classes.fabLink}
           href="https://github.com/igorashs/react-todo-list"
