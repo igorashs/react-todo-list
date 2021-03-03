@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { observer } from 'mobx-react-lite';
 import { TodoProvider, TodoContext, useTodoStore } from './TodoContext';
