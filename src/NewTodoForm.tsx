@@ -23,65 +23,59 @@ const NewTodoForm = () => {
   };
 
   return (
-    <Grid container direction="column">
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        px={2}
-        onSubmit={(e) => {
-          e.preventDefault();
+    <>
+      <Grid container direction="column">
+        <Box display="flex" justifyContent="flex-end" px={2}>
+          <Button
+            data-testid="open-btn"
+            variant="contained"
+            color="primary"
+            type="button"
+            onClick={() => setOpen(true)}
+          >
+            <AddIcon />
+          </Button>
+        </Box>
+      </Grid>
 
-          if (newTodo) {
-            addTodo(newTodo);
-            setNewTodo('');
-          }
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          type="button"
-          onClick={() => setOpen(true)}
-        >
-          <AddIcon />
-        </Button>
-
-        <Dialog open={open} onClose={() => handleClose()} fullWidth>
-          <DialogTitle>Add Todo</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              label="Note"
-              type="text"
-              value={newTodo}
-              onChange={(e) => setNewTodo(e.target.value)}
-              fullWidth
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button
-              color="secondary"
-              type="button"
-              onClick={() => {
-                handleClose();
-              }}
-            >
-              cancel
-            </Button>
-            <Button
-              color="primary"
-              type="button"
-              onClick={() => {
-                addTodo(newTodo);
-                handleClose();
-              }}
-            >
-              add
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Box>
-    </Grid>
+      <Dialog open={open} onClose={() => handleClose()} fullWidth>
+        <DialogTitle>Add Todo</DialogTitle>
+        <DialogContent>
+          <TextField
+            inputProps={{ 'data-testid': 'text-input' }}
+            autoFocus
+            label="Note"
+            type="text"
+            value={newTodo}
+            onChange={(e) => setNewTodo(e.target.value)}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            data-testid="close-btn"
+            color="secondary"
+            type="button"
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            cancel
+          </Button>
+          <Button
+            data-testid="add-btn"
+            color="primary"
+            type="button"
+            onClick={() => {
+              addTodo(newTodo);
+              handleClose();
+            }}
+          >
+            add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 
