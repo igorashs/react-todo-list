@@ -21,6 +21,7 @@ const TodoList = observer(() => {
       ) : (
         todos.map((todo) => (
           <ListItem
+            data-testid="todo-item"
             key={todo.id}
             button
             onClick={() => toggleCompleted(todo.id)}
@@ -39,6 +40,7 @@ const TodoList = observer(() => {
                     {todo.text}
                   </Typography>
                   <Button
+                    data-testid="todo-delete-item"
                     variant="contained"
                     color="secondary"
                     onClick={() => removeTodo(todo.id)}
